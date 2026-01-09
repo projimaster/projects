@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ghostbusters Home</title>
+    <link rel="stylesheet" type="text/css" href="ghost_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        window.onload = function() {
+        const dropdownLogo = document.querySelector(".header-logo2 img");
+        const dropdownMenu = document.querySelector(".navdropdown ul");
+
+        dropdownLogo.addEventListener("click", () => {
+            dropdownMenu.style.display =
+            dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+    };
+    </script>
+
+
+    <style>
+        body {
+            background-color: #202331;
+            margin: 0;
+            color: whitesmoke;
+            text-align: center;
+        }
+
+        /* Background Image */
+        .back-img {
+            width: 100%;
+            overflow: hidden;
+            opacity: 0.7;
+            z-index: 1;
+            margin-top: -110px;
+            position: absolute;
+        }
+
+        .back-img img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            z-index: 0;
+        }
+
+        /* Boxes */
+        #boxes {
+            padding-bottom: 30px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 1000px;
+            background-color: #434967;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px auto;
+            text-align: center;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .box img {
+            width: 25%;
+            border-radius: 10px;
+            object-fit: cover;
+            z-index: 999;
+        }
+
+        .box.right-img {
+            flex-direction: row-reverse;
+        }
+
+        .box.left-img {
+            flex-direction: row;
+        }
+
+        .box.right-img img {
+            float: right;
+            margin-left: 20px;
+        }
+
+        .box.left-img img {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .box-text {
+            width: 55%;
+            padding: 0 20px;
+            z-index: 999;
+            display: block;
+        }
+
+        .box-text h2 {
+            margin-top: 0;
+            color: whitesmoke
+        }
+        .box-text p {
+            margin: 10px 0 20px;
+            line-height: 1.5;
+        }
+
+        .box-btn {
+            display: inline-block;
+            background-color: #000;
+            color: #50a539;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .feature-btn:hover {
+            background-color: #2d2f3c;
+        }
+
+        .services-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+            color: whitesmoke;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .services-list li {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        h1 {
+            display: inline-block;
+            width: 160px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        @media (max-width: 1150px) {
+            .box img {
+                float: none;
+                display: block;
+                margin: 0 auto 15px;
+                width: 20%;
+            }
+
+            .box-text {
+                width: 95%;
+            }
+
+            h1 {
+                background-color: #24293e;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+ <!-- HEADER -->
+    <header>
+        <div class="header-logo">
+            <a href = "ghost_home.html">
+                <img src="bin/logo.png" alt="Ghostbusters Logo">
+            </a>
+        </div>
+        <div class="header-title">
+            <img src="bin/Ghostbusters-title.png" alt="Ghostbusters Title">
+        </div>
+        <div class="header-contact">
+            <p>Who you gonna call?</p>
+            <p class="phone-number">(555) 236-8888</p>
+        </div>
+        <div class="header-logo2">
+        <div class="navdropdown">
+          <img src="bin/logo.png" alt="Ghostbusters Logo" ALIGN="top"> 
+          
+            <ul>
+            <li><a href='ghost_home.html'class="active">Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html' >Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+        </div> <!-- end nav dropdown -->
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href='ghost_home.html'class="active">Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html' >Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+    </nav>
+
+    <!-- Title -->
+    <h1>Home</h1>
+
+    <div class="back-img">
+        <img src="bin/teamwork.png">
+    </div>
+   
+    <!-- Info boxes -->
+    <div id="boxes">
+        <div class="box right-img">
+            <img src="bin/team.jpg">
+            <div class="box-text">
+                <h2>Who Are We?</h2>
+                <p>We're the Ghostbusters! Whether you have a ghost in your home or a giant marshmallow man wreaking havoc around your city, we're here to help! We pride ourselves in our quick and efficient ghostbusting services so you can rest easy knowing that no ghosts will come close!</p>
+                <a href="ghost_mission.html" class="box-btn">Learn More Here!</a>
+            </div>
+        </div>
+
+        <div class="box left-img">
+            <img src="bin/image-007.jpg">
+            <div class="box-text">
+                <h2>About Our Services</h2>
+                <p>Our services can do anything ghost-related that you need, including:</p>
+                <ul class="services-list">
+                    <li>- Tracking paranormal activity in your home</li>
+                    <li>- Removing ghosts from your life</li>
+                    <li>- Trapping slippery ghosts</li>
+                    <li>- Weakening ghosts with proton streams</li>
+                </ul>
+                <a href="ghost_services.html" class="box-btn">Learn More Here!</a>
+            </div>
+        </div>
+
+        <div class="box right-img">
+            <img src="bin/image-002.jpg">
+            <div class="box-text">
+                <h2>Meet the Busters Team</h2>
+                <p>Behind every successful ghost capture is a crew of professionals who know their craft. From first call to final cleanup, our team works with precision, discretion, and a good sense of humor. They’re the reason hauntings turn back into homes.</p>
+                <a href="ghost_team.html" class="box-btn">Learn More Here!</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Now Button -->
+    <a href="ghost_contact.html" class="order-now">Order Now!</a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            <div class="footer-logo">
+                <a href = "ghost_home.html">
+                    <img src="bin/logo.png" alt="Ghostbusters Logo">
+                </a>
+            </div>
+            <div class="footer-title">
+                <h3>Ghostbusters</p>     
+                <p>New York</p>  
+            </div>
+        </div>
+        
+        <div class="footer-right">
+            <div class="footer-address">
+                <p>Address</p>
+                <p class="address">177A Bleecker Street, New York, NY</p>
+            </div>
+            <div class="footer-hours">
+                <p>Hours</p>
+                <p class="hours">Weekdays: 9AM-5PM Weekends: 10AM-3PM</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

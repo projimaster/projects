@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ghostbusters Team</title>
+    <link rel="stylesheet" type="text/css" href="ghost_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+    <script>
+        window.onload = function() {
+        const dropdownLogo = document.querySelector(".header-logo2 img");
+        const dropdownMenu = document.querySelector(".navdropdown ul");
+
+        dropdownLogo.addEventListener("click", () => {
+            dropdownMenu.style.display =
+            dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+    };
+    </script>
+    <style>
+        .btn {
+            display: inline-block;
+            background-color: #12111c;
+            color: #85f1a2;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #2d2f3c;
+            cursor: pointer;
+        }
+
+        #slides-wrapper {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #block {
+            background-color: #3f4767;
+            border-radius: 10px;
+        }
+
+        h1 {
+            display: block;
+            width: 100%
+        }
+    </style>
+
+    <script language="javascript">
+        function Member(name, image, text) {
+            this.name = name;
+            this.image = image;
+            this.text = text;
+        }
+
+        images = [new Member("Peter Venkman", "peter.png", "The face of the Ghostbusters! With his charm, wit, and questionable science credentials, he doesn't know when to back down when it comes to ghosts!"),
+            new Member("Egon Spengler", "egon.png", "The brains of the operation! Egon is the team's lead researcher and inventor of half the equipment we use daily! Also reliable with bringing snacks to the job!"),
+            new Member("Ray Stantz", "ray.png", "The heart and soul of the Ghostbusters! His passion and enthusiasm when it comes to ghost busting is unparalleled! Putting aside his bad habit of summoning ethereal beings, he's great!"),
+            new Member("Winston Zeddemore", "winston.png", "The backbone of the group! Always staying cool, calm, and colllected, he keeps us grounded and ready to do our jobs! He also has a calming aura surrounding him.")];
+        var image_index = 0;
+
+        $(document).ready (function() {
+            $('#prevbtn').click(function() {
+                image_index--;
+                if (image_index < 0) {
+                    image_index = images.length - 1;
+                }
+                moveSlides();
+            });
+
+            $('#nextbtn').click(function() {
+                image_index++;
+                if (image_index >= images.length) {
+                    image_index = 0;
+                }
+                moveSlides();
+            });
+
+            function moveSlides() {
+                $("#slide h2, #slide img, #slide p, #block").fadeOut(1000, function() {
+                    $("#slide h2").text(images[image_index].name);
+                    $("#slide img").attr("src", "bin/"+images[image_index].image);
+                    $("#slide p").text(images[image_index].text);
+                    $("#slide h2, #slide img, #slide p, #block").fadeIn(1000);
+                })
+	        };
+        });
+    </script>
+</head>
+<body style="background-color: #202331;">
+
+<!-- HEADER -->
+    <header>
+        <div class="header-logo">
+            <a href = "ghost_home.html">
+                <img src="bin/logo.png" alt="Ghostbusters Logo">
+            </a>
+        </div>
+        <div class="header-title">
+            <img src="bin/Ghostbusters-title.png" alt="Ghostbusters Title">
+        </div>
+        <div class="header-contact">
+            <p>Who you gonna call?</p>
+            <p class="phone-number">(555) 236-8888</p>
+        </div>
+        <div class="header-logo2">
+        <div class="navdropdown">
+          <img src="bin/logo.png" alt="Ghostbusters Logo" ALIGN="top"> 
+          
+            <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html' class="active">Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+        </div> <!-- end nav dropdown -->
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html' class="active">Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+    </nav>
+
+    
+
+    <h1>Meet the Team!</h1>
+
+    <div id="slides-wrapper" style="text-align: center">
+        <div id="block" style="display: inline-block; width: 90%; max-width: 1000px;">
+            <div id="slide" style="text-align: center;">
+                <h2 style="display: inline-block; text-align: center; width: 60%; max-width: 800px; height: auto; color: #5dbe42; font-size: 30px; margin-top: 15px;">Peter Venkman</h2>
+                <img src="bin/peter.png" style="display: block; margin: 0 auto; height: 275px;">
+                <p style="display: inline-block; text-align: center; width: 92%; max-width: 800px; height: auto; margin-top: 20px; background-color: #434967; color: #7fd667; font-size: 18px; padding: 10px">The face of the Ghostbusters! With his charm, wit, and questionable science credentials, he doesn't know when to back down when it comes to ghosts!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="buttons" style="text-align: center; margin-top: 20px; margin-bottom: 50px;">
+        <a class="btn" id="prevbtn"><< Prev</a>
+        <a class="btn" id="nextbtn">Next >></a>
+    </div>
+
+    <!-- Order Now Button -->
+    <a href="ghost_contact.html" class="order-now">Order Now!</a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            <div class="footer-logo">
+                <a href = "ghost_home.html">
+                    <img src="bin/logo.png" alt="Ghostbusters Logo">
+                </a>
+            </div>
+            <div class="footer-title">
+                <h3>Ghostbusters</p>     
+                <p>New York</p>  
+            </div>
+        </div>
+        
+        <div class="footer-right">
+            <div class="footer-address">
+                <p>Address</p>
+                <p class="address">177A Bleecker Street, New York, NY</p>
+            </div>
+            <div class="footer-hours">
+                <p>Hours</p>
+                <p class="hours">Weekdays: 9AM-5PM Weekends: 10AM-3PM</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

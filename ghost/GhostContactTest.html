@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghostbusters: Contact</title>
+  <link rel="stylesheet" href="ghost_style.css">
+  <style>
+    .flex-containertop {
+        background-color: #434967;
+        text-align:left;
+        line-height: 25px;
+        padding:20px;
+        margin-left:150px;
+        margin-right:150px;
+        margin-bottom: 50px;
+    }
+
+    .flex-containerOptions{
+        display: flex;
+        flex-wrap: nowrap;
+        width: auto;
+        margin: 10px;
+        text-align: left;
+      }
+
+    .flex-containerOptions > div {
+        flex: 1 1 auto;
+        width:50%;
+        margin: 10px;
+      }
+
+    .item-1 {
+            flex: 1 1 20px;
+        }
+
+    .item-2 {
+            flex: 2 1 50px; 
+        }
+
+    .subHeader{
+        font-size: 40px;
+        line-height: 45px;
+        text-align: left;
+        }
+
+    .btn {
+        background-color: #12111c;
+        color: #85f1a2
+    }
+  </style>
+</head>
+<script>
+window.onload = function() {
+    //defining vars 
+  var firstname = document.getElementById("firstname");
+  var lastname = document.getElementById("lastname");
+  var phonenum = document.getElementById("phonenum");
+  var email = document.getElementById("email");
+  var description = document.getElementById("description");
+
+  var jsonBtn = document.getElementById("jsonbtn");
+  var jsonText = document.getElementById("jsontext");
+  //response array components 
+  var responses= [];
+  var respNum= 0;
+
+  jsonBtn.addEventListener("click", function() {
+    //first checks if any text boxes are empty
+    if ((((firstname.value=="") || (lastname.value=="")) ||
+    ((phonenum.value=="") || (email.value==""))) ||
+    (description.value==""))
+    {
+        //requests a redo sumbission
+        //alert("Please sumbit complete and proper information so we may reach you. Thanks!");
+        jsonText.innerHTML = "Please sumbit complete and proper information so we may reach you. Thanks";
+        console.log("incorrect submission");
+    } else {
+        //stores proper sumbission in array
+      var data = {
+          "firstName": firstname.value,
+          "lastName": lastname.value,
+          "phoneNum": phonenum.value,
+          "email": email.value,
+          "description": description.value
+      };
+
+      //the only issue is this stores the data during a single onload not forever...
+      var submission = JSON.stringify(data);
+      jsonText.innerHTML = "Your Response has been recorded. Our team will contact you shortly with a complete evaluation. Thank you!";
+      responses += [respNum++,submission];
+      console.log(responses);
+    }
+  });
+};
+
+</script>
+
+<body style="background-color: #202331;">
+
+<!-- HEADER -->
+    <header>
+        <div class="header-logo">
+            <a href = "ghost_home.html">
+                <img src="bin/logo.png" alt="Ghostbusters Logo">
+            </a>
+        </div>
+        <div class="header-title">
+            <img src="bin/Ghostbusters-title.png" alt="Ghostbusters Title">
+        </div>
+        <div class="header-contact">
+            <p>Who you gonna call?</p>
+            <p class="phone-number">(555) 236-8888</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html'>Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' class="active">Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+    </nav>
+
+    
+    <!-- PAGE CONTENT-->
+
+
+  
+<div class="flex-containertop">
+
+    <h2 style="text-align:center; color:whitesmoke; line-height:30px;!important ">Reach an Expert and Get your free Quote!</h2>
+   <div class="flex-containerOptions">
+        <div>
+            <label style="color:whitesmoke">First Name:</label>
+            <br>
+            <input id="firstname" type="text" style=" border: 2px solid black; background-color: rgba(250, 235, 215, 0.199);">
+        </div>
+        <div>
+            <label style="color:whitesmoke">Last Name:</label>
+            <br>
+            <input id="lastname" type="text" style=" border: 2px solid black; background-color: rgba(250, 235, 215, 0.199);">
+        </div>
+        <div>
+            <label style="color:whitesmoke">Phone Number:</label>
+            <br>
+            <input id="phonenum" type="text" style=" border: 2px solid black; background-color: rgba(250, 235, 215, 0.199);">
+        </div>
+        <div>
+            <label style="color:whitesmoke">Email Address:</label>
+            <br>
+            <input id="email" type="text" style=" border: 2px solid black; background-color: rgba(250, 235, 215, 0.199);">
+            <br>
+        </div>
+    </div>
+
+    <h2 style="color:whitesmoke; margin-bottom:5px;!important">Description: </h2> 
+    <label style="color:whitesmoke"> 
+        Please include important information such as:<br> History of hauntings, Duration of hauntings, Manifestations and abilities (apperitions, sounds, residue telepathy, discomfort)
+    </label>
+
+    <textarea id="description" type="text" style="resize: vertical; width: 100%; height: 100px; border: 2px solid black; background-color: rgba(250, 235, 215, 0.199);"></textarea>
+    <br>
+
+    <button class="btn" id="jsonbtn">Submit</button>
+    <p id="jsontext" style="color: rgb(240, 11, 11);"></p>
+</div>
+
+
+
+
+
+
+
+
+    <!-- FIXED ELEMENTS : BOTTOM-->
+
+  <footer>
+      <div class="footer-left">
+          <div class="footer-logo">
+              <a href = "ghost_home.html">
+                  <img src="bin/logo.png" alt="Ghostbusters Logo">
+              </a>
+          </div>
+          <div class="footer-title">
+              <h3>Ghostbusters</p>     
+              <p>New York</p>  
+          </div>
+      </div>
+        
+      <div class="footer-right">
+          <div class="footer-address">
+              <p>Address</p>
+              <p class="address">177A Bleecker Street, New York, NY</p>
+          </div>
+          <div class="footer-hours">
+              <p>Hours</p>
+              <p class="hours">Weekdays: 9AM-5PM Weekends: 10AM-3PM</p>
+          </div>
+      </div>
+  </footer>
+
+</body>
+</html>

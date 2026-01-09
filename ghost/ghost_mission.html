@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+    
+    <title>Ghostbusters Mission</title>
+    <link rel="stylesheet" type="text/css" href="ghost_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        /* --- Homepage/Shared Boxes --- */
+        #boxes {
+            padding-bottom: 60px;
+        }
+
+        .box-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .block {
+            flex: 1 1 500px;
+            background-color: #434967;
+            border-radius: 10px;
+            padding: 20px;
+            color: whitesmoke;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .box-text {
+            width: 90%; 
+            padding: 0 20px;
+        }
+
+        .box-text h2 {
+            margin-top: 0;
+            color: whitesmoke;
+        }
+        .box-text p {
+            margin: 10px 0 20px;
+            line-height: 1.5;
+        }
+
+        .box-btn {
+            display: inline-block;
+            background-color: #12111c;
+            color: #85f1a2;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        @media(max-width: 1150px) {
+            .box-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .block {
+                width: 90%;
+                flex: none;
+                max-width: 600px;
+            }
+        }
+
+
+
+        /* --- Mission Page Gallery --- */
+        .mission-gallery {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto 60px;
+        }
+
+        .gallery-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .gallery-item-mission {
+            background-color: #434967;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            flex-basis: 250px;
+            text-align: center;
+        }
+
+        .gallery-item-mission img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #7fd667;
+        }
+
+        .gallery-item-mission .caption {
+            color: whitesmoke;
+            font-size: 1rem;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .gallery-item-mission:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            display: block;
+            width: 100%
+        }
+    </style>
+
+    <script>
+        
+        window.onload = function() {
+        const dropdownLogo = document.querySelector(".header-logo2 img");
+        const dropdownMenu = document.querySelector(".navdropdown ul");
+
+        dropdownLogo.addEventListener("click", () => {
+            dropdownMenu.style.display =
+            dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+    
+    
+
+            $.get("mission.json", function(data) {
+                document.getElementById("ab-title").innerHTML = data["about-title"];
+                document.getElementById("ab-text").innerHTML = data["about-text"];
+                document.getElementById("acc-title").innerHTML = data["accomplishments-title"];
+                document.getElementById("acc-text").innerHTML = data["accomplishments-text"];
+            });
+        };
+    </script>
+
+</head>
+<body style="background-color: #202331;">
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-logo">
+            <a href = "ghost_home.html">
+                <img src="bin/logo.png" alt="Ghostbusters Logo">
+            </a>
+        </div>
+        <div class="header-title">
+            <img src="bin/Ghostbusters-title.png" alt="Ghostbusters Title">
+        </div>
+        <div class="header-contact">
+            <p>Who you gonna call?</p>
+            <p class="phone-number">(555) 236-8888</p>
+        </div>
+        <div class="header-logo2">
+        <div class="navdropdown">
+          <img src="bin/logo.png" alt="Ghostbusters Logo" ALIGN="top"> 
+          
+            <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'class="active">Our Mission</a></li>
+            <li><a href='ghost_team.html' >Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+        </div> <!-- end nav dropdown -->
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'class="active">Our Mission</a></li>
+            <li><a href='ghost_team.html' >Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html'>Locations</a></li>
+            
+            </ul>
+    </nav>
+
+    <h1 style="display: block; width: 100%; text-align: center; font-size: 40px; color: #50a539;"> Our Mission</h1>
+    
+    <div id="boxes">
+        <div class="box-container">
+            <div class="block about-box">
+                <div class="box-text">
+                    <h2 id="ab-title"></h2>
+                    <p id="ab-text"></p>
+                </div>
+            </div>
+            <div class="block accomplishment-box">
+                <div class="box-text">
+                    <h2 id="acc-title"></h2>
+                    <p id="acc-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="mission-gallery">
+        <div class="gallery-wrapper">
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-012.jpg" alt="Gozer Containment">
+                <p class="caption">Gozerian Cross-Rip Containment (1984)</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-011.jpg" alt="Marshmallow Man">
+                <p class="caption">Stay Puft Marshmallow Man Defeat</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-010.jpg" alt="Vigo Subdual">
+                <p class="caption">Vigo the Carpathian Subdual (1989)</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-009.jpg" alt="Mood Slime">
+                <p class="caption">Psychomagnotheric Slime Neutralization</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-008.jpg" alt="Ecto-1">
+                <p class="caption">Ecto-1 Rapid Deployment</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-007.jpg" alt="Proton Pack">
+                <p class="caption">Proton Pack Technology</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-006.jpg" alt="Containment Grid">
+                <p class="caption">Spectral Containment Grid</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-005.jpg" alt="PKE Meter">
+                <p class="caption">P.K.E. Meter Field Research</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-004.jpg" alt="Library Ghost">
+                <p class="caption">Library Ghost Apprehension</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-003.jpg" alt="Slimer">
+                <p class="caption">Hotel Sedgewick "Slimer" Capture</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-002.jpg" alt="Scoleri Brothers">
+                <p class="caption">Scoleri Brothers Takedown</p>
+            </div>
+
+            <div class="gallery-item-mission">
+                <img src="bin/image-001.jpg" alt="Statue of Liberty">
+                <p class="caption">Statue of Liberty Animation</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Order Now Button -->
+    <a href="ghost_contact.html" class="order-now">Order Now!</a>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-left">
+          <div class="footer-logo">
+              <a href = "ghost_home.html">
+                  <img src="bin/logo.png" alt="Ghostbusters Logo">
+              </a>
+          </div>
+          <div class="footer-title">
+              <h3>Ghostbusters</p>     
+              <p>New York</p>  
+          </div>
+      </div>
+        
+      <div class="footer-right">
+          <div class="footer-address">
+              <p>Address</p>
+              <p class="address">177A Bleecker Street, New York, NY</p>
+          </div>
+          <div class="footer-hours">
+              <p>Hours</p>
+              <p class="hours">Weekdays: 9AM-5PM Weekends: 10AM-3PM</p>
+          </div>
+      </div>
+  </footer>
+
+</body>
+</html>

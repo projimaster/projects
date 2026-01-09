@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ghostbusters Locations</title>
+    <link rel="stylesheet" type="text/css" href="ghost_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        window.onload = function() {
+        const dropdownLogo = document.querySelector(".header-logo2 img");
+        const dropdownMenu = document.querySelector(".navdropdown ul");
+
+        dropdownLogo.addEventListener("click", () => {
+            dropdownMenu.style.display =
+            dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+    };
+    </script>
+
+
+    <style>
+        .loc-container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .loc {
+            background-color: #434967;
+            width: 25%;
+            color: #50a539;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: black;
+            color: #50a539;
+            font-size: 15px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2d2f3c;
+            cursor: pointer;
+        }
+
+        .details-box {
+            background-color: #434967;
+            padding: 20px;
+            color: white;
+            border-radius: 10px;
+            width: 50%;
+            margin: 40px auto 0;
+            text-align: center;
+            display: none;
+            margin-bottom: 50px;
+        }
+
+        .accomp-list {
+            display: inline-block;
+            text-align: left;
+            margin-top: 0px;
+            padding-left: 0;
+            list-style-position: inside;
+        }
+
+        .hours-list {
+            display: inline-block;
+            text-align: left;
+            margin-top: 0px;
+            padding-left: 0;
+            list-style-position: inside;
+        }
+
+        .contact-btn {
+            background-color: #12111c;
+            color: #85f1a2;
+        }
+
+        h1 {
+            display: block;
+            width: 100%
+        }
+
+        .flex-containertopBlurb h2 {
+            display: block;
+            width: 100%;
+            color: #249528;
+            text-align: center;
+            font-size: 40px;
+            z-index: 10;
+            position: relative;
+        }
+        
+    </style>
+</head>
+<body style="background-color: #202331;">
+<!-- HEADER -->
+    <header>
+        <div class="header-logo">
+            <a href = "ghost_home.html">
+                <img src="bin/logo.png" alt="Ghostbusters Logo">
+            </a>
+        </div>
+        <div class="header-title">
+            <img src="bin/Ghostbusters-title.png" alt="Ghostbusters Title">
+        </div>
+        <div class="header-contact">
+            <p>Who you gonna call?</p>
+            <p class="phone-number">(555) 236-8888</p>
+        </div>
+        <div class="header-logo2">
+        <div class="navdropdown">
+          <img src="bin/logo.png" alt="Ghostbusters Logo" ALIGN="top"> 
+          
+            <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html' >Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html' class="active">Locations</a></li>
+            
+            </ul>
+        </div> <!-- end nav dropdown -->
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href='ghost_home.html'>Home</a></li>
+            <li><a href='ghost_services.html'>Services</a></li>
+            <li><a href='ghost_mission.html'>Our Mission</a></li>
+            <li><a href='ghost_team.html' >Our Team</a></li>
+            <li><a href='ghost_testimonials.html'>Testimonials</a></li>
+            <li><a href='ghost_contact.html' >Contact</a></li>
+            <li><a href='ghost_locations.html' class="active">Locations</a></li>
+            
+            </ul>
+    </nav>
+
+    <h1>Our Locations</h1>
+    <div class="loc-container">
+    <div class="loc" data-city="New York" data-address="177A Bleecker Street, New York, NY" 
+    data-desc="The original Ghostbusters firehouse — fully restored and still humming with ectoplasmic energy!" data-img="bin/newyork.jpg"
+    data-accomplishments="Captured the Stay-Puft Marshmallow Man (1984); Reopened the Containment Unit Safely (1991); Cleared the New York Public Library Haunting"
+    data-hours="Weekdays: 9AM-3PM; Weekends: 10AM-3PM">
+      <h2>⚲</h2>
+      <h2>NYC</h2>
+      <button class="btn">Show Details</button>
+    </div>
+
+    <div class="loc" data-city="Boston" data-address="206 Washington St, Boston, MA" 
+    data-desc="Serving New England’s most historic haunts with proton precision and a wicked good attitude." data-img="bin/boston.jpg"
+    data-accomplishments="Eliminated the Fenway Phantom (2012); Neutralized the Beacon Hill Apparition (2015); Installed the Northeast Ecto-Grid (2019)"
+    data-hours="Weekdays: 10AM-5PM; Weekends: 11AM-5PM">
+      <h2>⚲</h2>
+      <h2>Boston</h2>
+      <button class="btn">Show Details</button>
+    </div>
+    </div>
+
+  <div id="details-box" class="details-box"></div>
+
+    <div class="flex-containertopBlurb" style="display: block; margin: 0 auto; margin-bottom: 100px; width: 70%; color: whitesmoke; text-align:center;">
+        <h2>Book your service now!</h2>
+
+        <a type="button" class="btn" href="ghost_contact.html" style="text-align: center; background-color: #20233100; margin-bottom: 100px;">
+            <input type="button" class="btn" value="Click Here" style="display: inline-block;">
+        </a>
+    </div>
+
+  <!-- Order Now Button -->
+    <a href="ghost_contact.html" class="order-now">Order Now!</a>
+
+  <!-- Footer -->
+  <footer>
+      <div class="footer-left">
+          <div class="footer-logo">
+              <a href = "ghost_home.html">
+                  <img src="bin/logo.png" alt="Ghostbusters Logo">
+              </a>
+          </div>
+          <div class="footer-title">
+              <h3>Ghostbusters</p>     
+              <p>New York</p>  
+          </div>
+      </div>
+        
+      <div class="footer-right">
+          <div class="footer-address">
+              <p>Address</p>
+              <p class="address">177A Bleecker Street, New York, NY</p>
+          </div>
+          <div class="footer-hours">
+              <p>Hours</p>
+              <p class="hours">Weekdays: 9AM-5PM Weekends: 10AM-3PM</p>
+          </div>
+      </div>
+  </footer>
+
+   <script>
+    const buttons = document.querySelectorAll('.loc .btn');
+    const detailsBox = document.getElementById('details-box');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const loc = btn.closest('.loc');
+        const city = loc.dataset.city;
+        const address = loc.dataset.address;
+        const desc = loc.dataset.desc;
+        const img = loc.dataset.img;
+        const accomplishments = loc.dataset.accomplishments.split(';');
+        const listHTML = accomplishments.map(a => "<li>" + a.trim() + "</li>").join('');
+        const hours = loc.dataset.hours.split(';');
+        const list2HTML = hours.map(a => "<li>" + a.trim() + "</li>").join('');
+
+        //put content in box depending on button
+        detailsBox.innerHTML = `
+          <img src='${img}'></img>  
+          <h2>${city} HQ</h2>
+          <p><strong>Address:</strong> ${address}</p>
+          <p>${desc}</p>
+          <h3>Recent Accomplishments</h3>
+          <ul class="accomp-list">${listHTML}</ul>
+          <h3>Hours</h3>
+          <ul class="hours-list">${list2HTML}</ul>
+          <p></p>
+          <button id="close-btn" class="btn">Close</button>
+        `;
+
+        //make the box show up
+        detailsBox.style.display = 'block';
+
+        //add the close button
+        document.getElementById('close-btn').addEventListener('click', () => {
+          detailsBox.style.display = 'none';
+        });
+      });
+    });
+    document.querySelector('.loc[data-city="New York"] .btn').click();
+  </script>
+
+  
+
+</body>
+</html>

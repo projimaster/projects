@@ -1,0 +1,345 @@
+/* --- Global & Header --- */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; 
+    /* text-align: center; */
+}
+
+h1 {
+    color: #249528;
+    width: 250px;
+    text-align: center;
+    font-size: 40px;
+    z-index: 10;
+    position: relative;
+}
+
+header {
+    background-color: #373c55;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    align-items: center;
+    width:100%;
+    padding: 10px 20px;
+    max-height: 120px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Column 1: Logo */
+.header-logo img {
+    height: 80px;
+    display: block;
+}
+
+/* Prep for navdropdown */
+.header-logo2{
+    display:none;
+}
+.header-logo2 img{
+    display:none;
+}
+
+
+/* Column 2: Title */
+.header-title img {
+    height: 6vw;
+    max-height: 80px;
+    width: auto;
+}
+
+/* Column 3: Contact */
+.header-contact {
+    color: #7fd667;
+    font-size: 18px;
+    text-align: right;
+}
+.header-contact p {
+    margin: 4px 0; 
+}
+.header-contact .phone-number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff !important;
+}
+
+@media (max-width:650px){
+.header-title img {
+    display:none;
+}   
+}
+
+/*prepping for navdropdown*/
+.header .navdropdown {
+    display:none;
+
+}
+
+.header .navdropdown ul {
+    display:none;
+
+}
+
+@media (max-width:650px){
+.header-title img {
+    display:none;
+}   
+
+.header-title {
+        display: none;
+    }
+
+}
+
+
+/* When screen size is too small, changes layout to top-to-bottom */
+@media (max-width: 900px) {
+
+    /* Hide full nav bar */
+    nav {
+        display: none;
+    }
+
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Hide title */
+    
+
+    /* Swap logos */
+    .header-logo img {
+        display: none;
+    }
+    .header-logo2{
+        display:block;
+    }
+    .header-logo2 img {
+        display: block;
+        height: 70px;
+        cursor: pointer;
+
+    }
+
+    /* Dropdown container */
+    .navdropdown ul {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: 90px;
+        background: #434967;
+        list-style: none;
+        padding: 10px;
+        border-radius: 6px;
+        width: 200px;
+        text-align: right;
+        border: 2px solid #000;
+        z-index: 100;
+    }
+
+    .navdropdown ul li a {
+        display: block;
+        padding: 10px;
+        color: #7fd667;
+        text-decoration: none;
+        font-size: 18px;
+        
+    }
+
+    .navdropdown ul li a:hover {
+        background-color: #f92f2f;
+        color: #fff;
+    }
+}
+
+
+
+
+/* --- Navigation Bar --- */
+nav {
+    background-color: #434967;
+    height: auto;
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    border-top: 1px solid #000;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    flex: 1 1 auto;
+    min-width: 100px;
+    max-width: 200px;
+}
+
+nav ul li a {
+    color: #7fd667;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: 0 5px;
+}
+
+/* --- Navigation Hovers & Active State --- */
+nav ul li:hover {
+    background-color: #f92f2f;
+}
+
+nav ul li a:hover {
+    color: #1c751f;
+}
+
+/* This class replaces your inline style */
+nav ul li a.active {
+    color: #249528;
+    font-weight: bold;
+}
+
+.navdropdown ul li a.active {
+    color: #249528;
+    font-weight: bold;
+}
+
+
+/* Footer */
+
+footer {
+    background-color: #181a25;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 30px;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+}
+
+.footer-right {
+    text-align: center;
+}
+
+/* Column 1: Logo */
+.footer-logo img {
+    height: 70px;
+    width: auto;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* Column 2: Title */
+.footer-title {
+    margin-left: -25px;
+    z-index: 1000;
+}
+
+
+.footer-title h3 {
+    font-size: 30px;
+    margin: 0;
+    font-family: Georgia;
+    color: #7fd667;
+}
+
+.footer-title p {
+    margin: 4px 0;
+    color: #FFF;
+    font-size: 20px;
+}
+
+/* Column 3: Address */
+.footer-address {
+    color: #7fd667;
+    font-size: 18px;
+    text-align: center;
+    display: inline-block;
+    width: 200px;
+    margin-right: 5px;
+    height: auto;
+    box-sizing: border-box;
+}
+.footer-address p {
+    margin: 4px 0; 
+}
+.footer-address .address {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Column 4: Hours */
+.footer-hours {
+    color: #7fd667;
+    font-size: 18px;
+    text-align: center;
+    display: inline-block;
+    width: 200px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.footer-hours p {
+    margin: 4px 0; 
+}
+
+.footer-hours .hours {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+
+
+@media (max-width: 850px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-height: none;
+    }
+
+    .footer-left {
+        margin-bottom: 20px;
+    }
+
+    .footer-logo img {
+        height: 70px;
+    }
+
+    .header-address {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .header-hours {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+}
+
+.order-now {
+    position: fixed;
+    bottom: 110px;
+    right: 20px;
+    background-color: #000000;
+    color: #50a539;
+    padding: 15px 25px;
+    text-decoration: none;
+    z-index: 9999;
+    border-radius: 10px;
+}
