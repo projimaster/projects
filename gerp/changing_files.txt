@@ -1,0 +1,9 @@
+@f out2.txt
+@f out3.txt
+@f out4.txt
+i
+am
+@f out5.txt
+now
+in
+out5.txt

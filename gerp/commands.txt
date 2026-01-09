@@ -1,0 +1,13 @@
+@i me
+@i hi
+@i hello
+me
+hi
+hello
+@f out2.txt
+me
+hi
+hello
+@i hi
+@i me
+@q

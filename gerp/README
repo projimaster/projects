@@ -1,0 +1,238 @@
+/**********************************************************
+* Project 4: Gerp
+* CS 15
+* README
+* Justin Projansky (jproja01), Joon Heo (jheo03)
+* 4/12/25
+*********************************************************/
+
+Compile/run:
+
+    - Compile with
+        make gerp
+    - Run with
+        ./gerp [inputDirectory] [outputFile]
+
+
+Program Purpose: 
+---------------
+
+    The purpose of this program is to read through a directory of files and
+    other directories and find words within those files.
+
+
+Files: 
+---------------
+
+    main.cpp:
+        Reads command line arguments from the user and uses the information
+        to initialize and run Gerp
+
+    Gerp.h:
+        Interface of the Gerp class. This class indexes the subdirectories and
+        files present in the directory provided by the user and implements
+        the functionality to search through them for specific words.
+        
+    Gerp.cpp:
+        Implementation of the Gerp class
+ 
+    HashTable.h:
+        Interface of the HashTable class. This class copies the functionality
+        of std::map but with the ability to search for case-insensitive input
+    
+    HashTable.cpp:
+        Implementation of the HashTable class
+
+    IndexingStructs.h:
+        Provides three structs that are used to index the files the program
+        needs to process:
+            - File: stores the filepath as a string and all the lines in the
+                    text in a vector of strings
+            - Line: stores a pointer to its associated File and the line number
+                    in the file at which the line appears
+            - Value: the actual word that will be stored in the hash table;
+                     contains the word as a string and a vector of Lines in
+                     which the word appears        
+        Also provides the open_or_die function, which checks if a file
+        can be opened. 
+        
+    unit_tests.h:
+        A unit testing file for the multiple classes in the program. Runs in
+        conjunction with the unit_test framework to allow for testing of
+        individual functions.
+
+    Makefile: File to build the program.
+
+    README: This file :O
+
+
+Architectural Overview:
+---------------
+    Our program was implemented in three main sections: main, Gerp, and
+HashTable.
+    main is very simple, implementing the reading of command line
+arguments from the user as the program is started, and then creating an
+instace of the Gerp class to pass information about the arguments to Gerp
+itself: the input directory path which is passed into the indexing function of
+Gerp and the output file name to the query loop to set the initial output file.
+    Gerp handles the indexing of the provided directory and its subdirectories,
+which is first represented as an FSTree, which stores individual directories as
+pointers to DirNodes in a tree data structure. The data in the FSTree is then
+indexed into a form that makes searching through the words in all the files
+quicker: individual ([word], [location the word is found at in the files])
+pairs are put into a map implemented in HashTable, and when the Gerp object
+gets a command from the user to search for a specific word, calls functions in
+the HashTable to do so.
+    In HashTable, the ([word], [location]) pairs described above are
+represented by a combination of 3 structs defined in IndexingStructs. The
+locations themselves are stored as Values, which contains the word to be stored
+as a string and a vector of Line structs in which the word appears. Line, in
+turn, represents a single line in a file, and stores a pointer to the file
+that the line is found in (represented by the File struct), and the line number
+at which the line appears in the file. Lastly, the File struct stores the
+filepath of the file it represents as a string and all the lines in the file
+inside a vector of strings. Text for a line is accessed by looking at a
+specific Line, following the file pointer to the File that the line is in and
+using its line number integer as the index to access the string in the vector
+of lines.tables.
+
+
+Data Structures:
+---------------
+
+We used vectors basically everywhere in our code since they are extremely
+helpful in multiple situations. A vector is a dynamically expanding array, and
+it is very useful for accessing specific elements using only an index since all
+elements are stored consecutively. This was extremely helpful when looping
+through a Value's location vector and printing out each line when necessary.
+While vectors struggle with adding or removing elements at the front, we never
+found a situation where this was necessary (we always added elements to the
+back, and we never removed elements), so we essentially received all the
+benefits of using vectors with none of the downsides.
+
+Here are all instances of our use of vectors:
+- Every Value struct holds a vector of locations (Lines) where it can be found.
+    this is very useful since we only ever have to add Lines (never remove),
+    and we can loop over the array to check each individual line for a certain
+    condition.
+- Every File struct holds a vector of strings, and each string is a specific
+    line that can be found in that file. This is quite useful since it provides
+    an easy way to store every line so that, when necessary, that line can be
+    printed using only its index.
+- When searching for repeat words within one line, we use a vector to store
+    each word that has been found already. Thus, when a new word is read, we
+    can search the vector of repeat words to see if the new word is a repeat.
+    If it is, we do nothing to it, but if it isn't, then we process it and add
+    it to the repeats list.
+- We use a similar repeats system in our print_insensitive function. There, we
+    store line pointers in a vector to ensure that we don't print the same line
+    twice for a single command. This works similarly to the last point.
+- In order to make valgrind happy, we use two vectors to store every file
+    pointer and every line pointer we end up using. So, when the time comes to
+    recycle all heap-allocated information, we can simply loop through these
+    vectors and delete all this information.
+- Our hash table actually stores a vector of vectors!
+    - The top layer of vectors is for the bucket. So, whenever we need to hash
+        a specific word, we can simply find the hash index and go directly
+        to that index in order to store the word.
+    - Since we use chaining in order to deal with collisions in our hash table,
+        the lower layer of vectors is for the values themselves. So, every
+        value that is hashed to that bucket is stored in that bucket's vector.
+    - So, in total, our hash table is a vector of buckets, and each bucket
+        stores a vector of values that have been hashed to the same bucket.
+        This system allows us quick access to any bucket, and we are able to
+        loop through one bucket to find any specific value.
+
+We used a hash table in our code, as well, since they provide O(1) time
+complexity for insertion and finding (on average). Thus, it allows us to
+efficiently store and search for our keys (the word to be searched for) and
+their values (the list of locations where that word can be found). Our hash
+table is really a vector of vectors (as mentioned earlier). So, our hash table
+stores a list of buckets, and each bucket stores a list of Values (in our case,
+a Value is a struct which contains our words and their locations (our keys and
+their values)). Our hash table was vital for storing each individual word and
+its location in a place where it could be searched for quickly and efficiently.
+
+
+Algorithm:
+---------------
+Our first algorithm focuses on reading in the data from every file in the given
+directory. This covers the private traverseDirectory, recursiveTraversing,
+read_file, read_line, and stripNonAlphaNum functions in the Gerp class.
+- traverseDirectory is the wrapper function for the recursive
+    recursiveTraversing function, invoking the provided FSTree class to create
+    a tree storing all the directories and files in the root directory and
+    passing the root node of the tree to the recursiveTraversing function.
+    The recursiveTraversing algorithm is as follows: first, the name of the
+    current directory is concatenated to the path string passed as a parameter,
+    with a slash added if the current directory is not the root node (which is
+    checked by seeing if the path string is currently empty). For each file in
+    the directory, read_file is called to handle the eponymous task. For each
+    subdirectory in the current directory, recursiveTraversing is called,
+    recursively searching for files and subdirectories in each subdirectory.
+- read_file first creates a new instance of the File struct and pushes it to
+    the back of the allFiles vector. It then opens up the file in an ifstream
+    and reads in each line, calling the read_line function each time, with the
+    line text, the line number, and a pointer to the file as parameters.
+- read_file takes these parameters and creates a new instance of the Line
+    struct. A vector of strings is created to keep track of repeating words in
+    a single line, and words are extracted one by one from the line text with a
+    stringstream, stripped of all non-alphanumeric characters from the left
+    and right by calling the stripNonAlphaNum function, and then, if it hasn't
+    yet been found in the line, is inserted into the HashTable as a
+    (key, value) pair of the word that was found in the line and the
+    information associated with the line that the word was found in.
+- stripNonAlphaNum is a simple function that takes in a string, and considers
+    it from its left and right extremes. If the left index doesn't have a char
+    that is alphanumeric, it increments until it does, and if the right index
+    doesn't have a char that is alphanumeric, it decrements until it does, and
+    the function returns the substring between the left and right indices,
+    stripping away the non-alphanumeric characters to the left and right of the
+    string.
+    
+
+Our second algorithm focuses on utilizing a query loop to receive commands from
+the user. Our query loop has four commands it can process: the @q command, the
+@f command, the @i / @insensitive command, and the AnyString command.
+- The @q command is pretty simple, if this command is inserted, the user is not
+    prompted to insert another query, and the program ends while printing an
+    exit message to the user.
+- The @f command is a bit more complicated. The HashTable class stores an
+    ofstream variable containing the stream to output the results of the user's
+    queries. Thus, when the @f command is run, it closes the ofstream variable
+    and calls open_or_die on that same variable with the new output file's
+    name. Thus, all future outputs will be outputted to the file sharing the
+    new file's name.
+- The AnyString command is way more complicated, but that's to be expected.
+    This command is run when the user inputs any valid string that doesn't
+    share a name with the other commands. This command calls Gerp's word_search
+    function with the given word as an argument, as well as a boolean
+    confirming we are doing a sensitive search. The word is stripped down with
+    the help of the stripNonAlphaNum function, and it calls the search function
+    in Gerp's hash table. This search function hashes the word to find its
+    designated bucket in the hash table. Then, it loops through this bucket
+    until the word's Value struct is found, in which case it calls the
+    print_sensitive function and returns (If the word is not found within the
+    bucket, it prints a "Not Found" message to the output file). The
+    print_sensitive function takes the Value of the word as an argument, and
+    it simply loops through the Value's locations vector and prints out
+    each element's information to the output file.
+- The @i / @insensitve command works similarly to the AnyString command, though
+    it is a bit more complicated in how it prints out information. This command
+    works basically identically to the AnyString command up until HashTable's
+    search function. If the search being performed is an insensitive search,
+    the search works the same as AnyString's search with a couple caveats.
+    First, a new vector containing Line struct pointers is created, and the
+    print_insensitive function is called using this vector as an argument (and
+    note that this vector is passed-by-reference to print_insensitive). Second,
+    after a Value struct is found which contains a matching lowercase word to
+    the one being searched for, the search function doesn't return, as there
+    may be other Value structs with matching lowercase words, as well.
+    print_insensitive also works similarly to AnyString's equivalent, though
+    before printing any line, it first checks to see if the Line that is about
+    to be printed is contained within the Line pointer vector. If it is, then
+    nothing is printed, but if it isn't, then it is added to the vector, and
+    the Line's information prints as normal. This is to avoid a line from being
+    printed twice when only one command is run.
+After a command is run, as long as that command isn't @q or @quit, the program
+continues to ask the user for additional queries.

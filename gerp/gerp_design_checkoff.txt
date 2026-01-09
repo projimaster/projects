@@ -1,0 +1,165 @@
+Names: Justin Projansky, Joon Heo
+utlns: jproja01, jheo03
+
+Answer the questions below, and submit your answers under the assignment
+"gerp Design Checkoff" on Gradescope. You must sign up for a design checkoff
+slot with a TA to discuss your provided answers (see spec for sign up link).
+Make sure to submit this file *prior* to your design checkoff.
+
+For each question, give as much detail as you feel is necessary.
+
+1. What classes and structs will you implement for your program? For each class,
+   provide a list of public functions of that class; for each struct, provide a
+   list of member variables.
+
+Answer: 
+
+Now:
+Struct File:
+- string path;
+- vector<string> lines;
+
+Struct Line:
+- File *home_file;
+- int line_num;
+
+Struct Value:
+- string word;
+- vector<*Line> locations;
+
+
+Before:
+Struct Location:
+- string path;
+- string line;
+- int line_num;
+
+Struct Value:
+- string word;
+- vector<Location> locations;
+
+Class HashTable:
+- HashTable();
+- int insertChaining(string word, string line, int line_num);
+- void expand();
+- vector<vector<Value>> valueTable;
+- int size;
+- int numBuckets;
+
+Class Gerp:
+- void traverse_tree(FSTree fileTree);
+- void traverse_file(string file);
+- void open_or_die(string fileName, ifstream &infile);
+- void query_loop();
+- void find_val(string val, bool sens);
+- FSTree fileTree(string rootName);
+- HashTable sensTable;
+- HashTable insTable;
+        
+2. Describe the index that you will build for querying. What specific data
+   structures will you use to build this index? *Important*: Bring an
+   accompanying drawing of your index structure when you come to your checkoff.
+
+Answer: Our data will be indexed with a hash table that will include the use
+        of two structs:
+- A Value struct, containing the word to be searched for and a list of 
+   Location structs
+- A Location Struct, containing the file path to reach the word, the line
+   number that the word was found on, and the actual line which contained the
+   word.
+
+3. To use your index, you will use something for lookup (the key) and you will
+   get some associated data back (the value). What are the C++ *types* of your
+   index's key and value? Examples of valid types: int, string,
+   vector<string>, vector<list<string>>; you may also define custom types using
+   structs/classes, e.g., Animal and vector<Animal> are valid types if you
+   define a struct/class named Animal. If your key/value types involve custom
+   classes/structs, they should be included in your answer to question #1.
+                
+Answer:
+
+   Key type: string (in Value struct)
+   Value type: vector<Location> (also in Value struct)
+
+4. Explain what a collision is versus having multiple lines associated with 
+   a particular word. Write (and/or draw) out an example of when a 
+   collision occurs. Write (and/or draw) out an example of when multiple 
+   lines associated with a single word. 
+
+Answer: A collision is when two different keys end up hashing into the same
+   bucket. This means that, if a word is found in two different locations, both
+   locations of that word are stored. Though, a collision happens when two
+   different words attempt to take up the same bucket.
+
+5. What do you expect the *space* complexity of your index will be? How many
+   times will a single line be stored according to your data structures?
+
+Answer: The space complexity of our hash table will be O(n), where n is the
+   number of words in every file. in the directory The space complexity of our 
+   ocation storage will be
+ O(y * z), where y is the average line length and
+   z is the average number of words per line. So, a single line will be stored
+   once for each word it contains.
+
+6. What is the time complexity of *building* your index? If you refer to some
+   variable, be sure to specify what the variable refers to, e.g., in "O(n)",
+   state explicitly what "n" is.
+
+Answer: The complexity of building the index is O(n), where n is the number
+   of words in the entire directory given.
+                
+7. What is the time complexity of *using* your index for lookup? As above,
+   be specific about variables you use.
+
+Answer: The time complexity for using the index for lookup is O(1) on average,
+   due to our use of a hash table to store the values.
+
+8. How will you handle case-sensitive search?
+   What is the time complexity (should be close to O(1))?
+
+Answer: We will handle this by having a hash table specific to case-sensitive
+   search, so we will store the words as they appear in their respective files
+   in this table.
+
+9. How will you handle case-insensitive search?
+   What is the time complexity (should be close to O(1))?
+
+Answer: We will handle this by having a hash table specific to case-insensitive
+   search, so we will store the lowercase versions of the words from their
+   respective files in this table.
+
+10. How are you handling duplicate words within a line? Consider these two example 
+   lines: 
+
+      (i) the cat and the dog 
+      (ii) the cat and THE dog 
+
+   If a user does a case sensitive query on line (i) it should report 'the' only 
+   once by showing the line only once in the output. How will you do this? 
+
+   If a user does a case insensitive query on line (ii) it should report 'the' 
+   only once by showing the line only once in the output. How will you do this? 
+
+Answer: To handle duplicate words, we plan on making an array each time we read
+   in a new line. Whenever we read in a new word, we handle it as necessary
+   (turn into lowercase for insensitive search, do nothing for sensitive
+   search) and we store it in the array. Then, once we read in a new word, we
+   check if that word is stored in our word array. If it isn't, we add it to
+   the array, and if it is, then we ignore it.
+
+11. How will you test your implementation and what specific evidence of testing
+    will you submit?
+
+Answer: We will use a combition of unit tests and diff testing. We also plan on
+   using the exceedmem.cpp file to check our memory usage.
+
+12. What is your schedule for completing this assignment? Include specific dates
+    and the tasks that you would like to accomplish by each date. Do not forget
+    testing!
+   
+   Answer: By the end of the day today (4/12), we plan on finishing this
+      design checkoff and the phase 1 coding portion. We have our checkoff
+      appointment set for 4/15, so we will hopefully get the all-clear then.
+      By the end of the long weekend, we hope to finish the entire program,
+      and by the due date, we plan on having everything fully tested and
+      functioning.
