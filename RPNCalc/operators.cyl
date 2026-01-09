@@ -1,0 +1,103 @@
+%%%
+%%% Operators
+%%%
+%%% Uses multiple operators to compare numbers
+%%%
+%%% Author:  Justin Projansky (jproja01)
+%%%
+
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
+>
+print              % should print true
+clear
+2                  % push 2 onto the stack
+9                  % push 9 onto the stack
+<
+print              % should print true
+clear
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
+<
+print              % should print false
+clear
+2                  % push 2 onto the stack
+9                  % push 9 onto the stack
+>
+print              % should print false
+clear
+
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
+>=
+print              % should print true
+clear
+2                  % push 2 onto the stack
+9                  % push 9 onto the stack
+<=
+print              % should print true
+clear
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
+<=
+print              % should print true
+clear
+2                  % push 2 onto the stack
+9                  % push 9 onto the stack
+>=
+print              % should print true
+clear
+
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
+<=
+print              % should print false
+clear
+2                  % push 2 onto the stack
+2                  % push 2 onto the stack
+<=
+print              % should print true
+clear
+2                  % pushes 2 onto the stack
+9                  % pushes 9 onto the stack
+>=
+print              % should print false
+clear
+2                  % push 2 onto the stack
+2                  % push 2 onto the stack
+>=
+print              % should print true
+clear
+
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
+==
+print              % should print false
+clear
+2                  % push 2 onto the stack
+2                  % push 2 onto the stack
+==
+print              % should print true
+clear
+
+#t                  % pushes true boolean onto the stack
+#t                  % pushes true boolean onto the stack
+==
+print              % should print true
+clear
+#t                  % pushes true boolean onto the stack
+#f                  % pushes false boolean onto the stack
+==
+print              % should print false
+clear
+
+{ hi }                 % pushes rstring onto the stack
+{ hi }                 % pushes rstring onto the stack
+==
+print              % should print true
+clear
+{ hi }                  % pushes rstring onto the stack
+{ ih }                  % pushes rstring onto the stack
+==
+print              % should print false
+clear

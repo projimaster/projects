@@ -1,0 +1,175 @@
+/**********************************************************
+* Project 1: Metro Simulator
+* CS 15
+* README
+* Justin Projansky (jproja01)
+* 2/18/25
+*********************************************************/
+
+Compile/run:
+     - Compile using
+            make MetroSim
+     - run executable with
+            ./MetroSim stationsFile passFile [commands]
+
+
+Program Purpose: 
+---------------
+
+    The purpose of this program is to make a program that simulates a train
+    moving to different stops and the behavior of passengers as they get on
+    and off the train.
+
+
+Files: 
+---------------
+
+main.cpp:
+     Short main file which handles simple driver functions such as reading in
+     files.
+
+MetroSim.cpp:
+     Implementation of MetroSim class.  Main
+     functionality of running the Metro Simulation, is able to
+     move trains and deal with passengers going on/off the train.
+
+MetroSim.h:
+     Interface of MetroSim class.
+
+PassengerQueue.cpp:
+     Implementation of PassengerQueue class. 
+     Manages list of passengers on the train and in stations using vectors.
+
+PassengerQueue.h:
+     Interface of PassengerQueue class.
+
+Passenger.cpp:
+     Implementation of Passenger class. 
+     Manages each passenger's information, including their ID number, starting
+     station, and ending station.
+
+Passenger.h:
+     Interface of Passenger class.
+
+stations.txt:
+     An example file containing a list of stations.
+
+test_commands.txt:
+     Sample list of commands that you could give to the simulator
+
+ultimate_text.txt:
+     Another sample list of commands that you could give to the simulator
+
+unit_tests.h: A unit testing file for the CharArrayList Class. 
+ *  In conjunction with the unit_test framework to allow for testing of 
+ *  individual functions.
+
+Makefile: File to build the program.
+
+
+Architectural Overview:
+---------------
+
+This program focuses on moving around Passenger objects. These objects are
+stored in a PassengerQueue class, which has a vector of passengers as a private
+member and a handful of public member functions to manipulate this list. A
+list/vector of PassengerQueues is also stored in the MetroSim class. This class 
+also contains a private Station struct and a list/vector of these Stations.
+The member functions of the MetroSim class functionally create the simulation
+while editing/utilizing these lists.
+
+
+Data Structures:
+---------------
+For this assignment, I used queues to manage lists of passengers, and these
+queues utilize vectors behind the scenes. There is also a list of stations,
+which also utilizes a vector, and a list of queues which uses a vector, as
+well.
+
+Queues follow a first-in, first-out (FIFO) principle. Thus, elements are added
+to the back of the list and removed from the fron tof the list. I used this
+data structure since it allows the use of a vector, which is a very complex
+type of list, while creating an abstraction barrier: instead of giving a 
+programmer full functionality of a list, which is too powerful, we give them
+the more restricted operations that a queue provides. So, since all that is 
+needed for the lists implemented in this simulation are the operations that
+queues provide, I decided to use queues for this simulation.
+
+The member functions associated with a queue include:
+- front: Returns the element at the front of the queue
+- enqueue: Adds an element to the end of the queue
+- dequeue: Removes the first element of the queue
+- size: Returns the number of elements in the queue
+- print: Prints out the information of each element in the queue
+
+Other situations where I could utilize a queue include:
+- Keeping track of customers waiting in line to buy coffee
+     - Since a line like this is virtually the same as a queue, I can use
+       enqueue() to add customers to the back of the line and dequeue() to 
+       remove them from the front of the line. I could also use front() to view
+       their order. Since this scenario only required queue's operations to 
+       function, using a queue to create an abstraction barrier would be
+       a smart move.
+- Keeping track of groceries on the shelf in a grocery store
+     - Since the oldest products are placed in the front (so they can sell 
+       before expiring) and the newest products are placed in the back, this
+       is effectively a FIFO system similar to waiting in line. Thus, I can
+       use enqueue() to add new products to the back of the shelf, dequeue() to
+       remove products from the front of the shelf, and front() to view the
+       information of the product at the front of the shelf.
+
+As queues are relatively simple, there isn't much interesting information to
+cover concerning their complex algorithms. Most functions just call another
+vector function to work (i.e. enqueue() calls vector's push_back() function,
+and size() calls vector's size() function).
+
+A slightly interesting thing about using a vector for a queue is that there is
+no easy way to remove the element at the front of the queue (in other words,
+performing dequeue() is a bit of a challenge). So, instead of simply calling a
+function, we check if the list is empty, and if it isn't we call the vector's
+erase() function with the vector's begin() function as an argument.
+
+The print function as part of the PassengerQueue class is also quite
+interesting. For this function, we first loop through the entire queue, and 
+for the element at() the highlighted index, we print their value using the
+Passeger class's print() function.
+
+
+Testing:
+---------------
+
+For the Passenger and PassengerQueue classes, I used unit tests to ensure that
+all member functions worked as intended. (I also looked up how to use unit
+tests to check outputs to the terminal to ensure that these also work as
+intended). For the MetroSim class, I found that some of these functions seemed 
+to be a bit too convoluted for me to wrap my head around the required unit
+tests for them, so I instead used the compiler to check for any errors in the
+functions, and I then used print statements and diff to find any errors in
+output or any variables stored in the class.
+
+I also used Valgrind to find any memory errors in the program, and this leads
+to a major bug that I found in my function. I found that, despite not adding
+any passengers to my simulation, memory was still being lost, and I couldn't
+figure out where this was happening. After searching through my code, I found
+that I had unnecessarily allocated Stations and PassengerQueues on the heap
+rather than simply creating them on the stack. I initially tried to create a
+destructor to deal with the lost memory, but when this didn't work, I simply
+stopped allocating this information to the heap so that this memory wasn't
+lost.
+
+Another bug I encountered in my program was with passengers on the train not
+properly departing from the train at their stop. When running my program, I 
+found that passengers on the train weren't getting off at their stop, and some
+were simply disappearing at a seemingly random place. While trying to find the
+cause of this, I found that, instead of the passengers being placed into their
+proper PassengerQueue on the train corresponding to their endingStation value,
+it was instead putting them onto the PassengerQueue with their starterStation
+value. Once I fixed this issue, the passengers got on and off the train as
+intended.
+
+During testing, I tried to cover everything possible about where the passengers
+could be on the train and where their departing stations might be: passenger
+gets off at the next stop, passenger gets on and stays for a while,
+passenger gets off at an index lower than that of their starting station,
+passenger has the same starting station as ending station, multiple passengers
+waiting at the same station, multiple passengers on the train at once, etc. 

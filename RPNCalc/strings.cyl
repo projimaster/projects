@@ -1,0 +1,16 @@
+%%%
+%%% Strings
+%%%
+%%% Uses a string to read in commands
+%%%
+%%% Author:  Justin Projansky (jproja01)
+%%%
+
+{ 2 3 5 + + print }
+exec                            % should print 10
+
+{ 2 3 5 * * print }
+exec                            % should print 30
+
+{ { 10 20 30 + + } exec }
+exec                            % should print 60

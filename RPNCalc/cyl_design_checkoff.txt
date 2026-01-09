@@ -1,0 +1,174 @@
+Name: Justin Projansky
+utln: jproja01
+
+Answer the questions below, and submit your answers under the
+assignment "CalcYouLater Design Checkoff" on Gradescope.  You must
+sign up for a design checkoff slot with a TA to discuss your provided
+answers (see spec for link).
+
+Unless otherwise specified, your answers below should be *brief*: no
+more than three sentences/question.
+
+        
+1. Are you comfortable using try-catch?  How do you think you would
+   use this in your design for this assignment?
+
+   Lets say my program consists of: 
+
+   funcA() {
+	throw runtime_error() 
+   }
+
+   funcB() {
+       workA()
+       funcA()
+       workB()
+   }
+
+   funcC() {
+       try {
+	    funcB()
+       }
+       catch(runtime_error) {
+	  workC()
+       }
+   }
+
+   I call funcC().  Which of the "work" functions will be called, and
+   in what order?
+
+   Answer: workA() will be called first, but workB() will be skipped since
+           funcA(), which immediately throws an error, is called first. Thus,
+           since funcB() returns an error, workC() then runs.
+
+
+2. Run the following example on the reference: 
+
+   ./theCalcYouLater
+   3 { a.txt } + 
+   print 
+
+   What happens after the first command?
+   What happens after the second?
+
+   Answer: After the first command, an error stating "datum_not_int" is
+           generated. After the third command, another error stating
+           "empty_stack" is generated.
+
+
+3. Extend the previous example.  What happens if I try to perform "+"
+   between a string and an integer?  Which elements are popped off the
+   stack and remain popped off?
+
+   Answer:  When this happens, a "datum_not_int" error is generated, and
+            nothing gets added to the stack. Thus, when the stack is printed, an
+            error is generated because the stack remains empty.
+
+4. What does exec do?  What does file do?  What does if do?
+
+   Answer:
+        - exec takes the top element of the stack (assuming it's an rstring),
+          and it turns the string's contents into a sequence of commands
+        - file pops the top element of the stack (assuming it's an rstring
+          containing a filename). It takes the contents of the rstring as a
+          file name, and it replaces the rstring's contents with those from
+          the file. The commands from the file are then processed.
+        - if pops two rstrings off of the stack and a boolean; it
+          executes the first rstring when the boolean is false, and it
+          executes the second rstring when the boolean is true.
+
+
+5. Consider the if example from the spec: 
+
+   3 4 < 
+   { #t } { #f } if 
+   print 
+
+   Draw the stack after each Datum is processed. 
+
+Answer: 
+    1. #t
+    2. #t, { #t }, { #f }
+    3. #t, { #t }
+    4. #t
+    5.
+    6. #t
+
+
+6. How will your program interact with the user? What should happen if your
+   program encounters an error during this interaction?
+
+Answer: My program will perform all tasks requested by the user or input file,
+        and it will print the stack only when called for. If the program
+        encounters an error, it stops the current tasks and prints the error,
+        and the program keeps running regardless (I assume due to the error
+        catch system).
+
+
+7. What classes will you need in your program?  What are the important
+   functions and member variables that those classes will comprise?
+   How will the classes interact (i.e., which classes will be clients
+   of others)?
+
+   What data structures will you use?  It is okay if you use more than
+   three sentences here.  Feel free to provide your answer in list
+   form.
+
+   Answer: 
+    - Classes:
+        - Datum
+            - This class will store all kinds of variables on the stack.
+            - It will also contain some functions for comparing two
+              DatumStacks and a couple of other useful functions.
+        - RPNCalc
+            - This class will be the main driving force of the program.
+            - This class keeps track of all possible user-inputted commands,
+              and its functions help execute these commands.
+            - This class will hold the main stack that the rest of the program
+              revolves around, and the class will have multiple functions in
+              order to manipulate the stack.
+    - How they will interact:
+        - The DatumStack class will be used by the RPNCalc class.
+            - Specifically, the RPNCalc class's stack will consist of multiple
+              DatumStack objects.
+        - The RPNCalc class will the the primary place to perform user-inputted
+          tasks, and DatumStack's functions will help with this.
+    - Data structures:
+        - A stack to implement the main functionality of the program
+        - A list (potentially an ArrayList or Linked List) to implement
+          the stack
+
+
+8. There are three sources of input for processing commands: cin,
+   files, and rstrings.  What C++ data type can allow you to write the
+   same code that handles commands from all three of these sources?
+
+   Answer: All three of these are instances of std::istream, which could be
+           used to handle commands from all three sources. Thus, I can decide
+           which one to use, and I can pass along the corresponding istream
+           to a function, so all three input sources will have the same
+           underlying code handling them.
+
+
+9. How do you plan to test your program?  What evidence of testing do
+   you plan to submit?
+
+   Answer: I plan on testing my program primarily with unit tests. This is to
+           ensure that all of my functions work as intended and create the
+           expected output on the stack. I will also need to use diff testing
+           to find whether or not the output matches between my program and the
+           sample program.
+           I plan on submitting my unit_tests.h file as well as any command
+           files I use to diff test.
+
+
+10. What is your timeline for completing this project?  What would you
+    like to have completed, and by which dates?
+
+    Answer: I plan to submit phase 1 of the project on time (by tomorrow at
+            11:59). I then plan on spending a couple hours a day (likely
+            lasting until the end of the weekend) working on the functions and
+            ensuring that all of them perform the required tasks with no bugs.
+            I will spend the last couple of days doing some final rigorous
+            testing (using unit tests and diff testing) to ensure that no
+            strange errors slipped through the cracks.

@@ -1,0 +1,3 @@
+Passenger 1 left train at station Fenwood Rd
+Passenger 2 left train at station Brigham Circle
+Passenger 3 left train at station Brigham Circle

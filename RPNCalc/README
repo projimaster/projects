@@ -1,0 +1,163 @@
+/**********************************************************
+* Project 2: CalcYouLater
+* CS 15
+* README
+* Justin Projansky (jproja01)
+* 3/4/25
+*********************************************************/
+
+Compile/run:
+     - Compile using
+            make
+     - run executable with
+            ./CalcYouLater
+
+
+Program Purpose: 
+---------------
+
+    The purpose of this program is to simulate a calculator using reverse
+    polish notation while utilize multiple calculator functions to manipulate 
+    the variables in the calculator.
+
+Files: 
+---------------
+
+main.cpp:
+     Short main file which simply creates a RPNCalc object.
+
+RPNCalc.cpp:
+     Implementation of RPNCalc class class. Is able to keep track of multiple
+     Datum objects and manipulate the stack of objects with functions.
+
+RPNCalc.h:
+     Interface of RPNCalc class.
+
+DatumStack.cpp:
+     Implementation of DatumStack class. 
+     Manages list of Datum objects using stacks.
+
+DatumStack.h:
+     Interface of DatumStack class.
+
+parser.cpp:
+     Implementation of parser function. 
+     Used for parsing the contents of user input into an std::string.
+
+parser.h:
+     Interface of parser function.
+
+cylc files: 
+     Used for testing the program with diff.
+
+unit_tests.h: A unit testing file for the multiple classes in the program. 
+ *  In conjunction with the unit_test framework to allow for testing of 
+ *  individual functions.
+
+Makefile: File to build the program.
+
+
+Architectural Overview:
+---------------
+
+This program focuses on moving around and manipulating Datum objects. These 
+objects are stored in a DatumStack class, which has a vector of Datums as a 
+private member and whose member functions cause it to simulate a stack. The 
+member functions of RPNCalc functionally create the interactive calculator
+while editing/utilizing the DatumStack.
+
+
+Data Structures:
+---------------
+For this assignment, I used a stack to manage a list of Datums, and these
+stacks utilize vectors behind the scenes.
+
+Stacks follow a last-in, first-out (LIFO) principle. Thus, elements are added
+to the back of the list and removed from the back of the list. I used this data
+structure in conjunction with a vector because one of the main disadvantages
+of using a vector is the time it takes to insert/remove elements at the 
+beginning of the list. Though, if you're only interacting with the back of the
+list, then this disadvantage never matters. Additionally, fashioning a vector
+as a stack creates an abstraction barrier: instead of giving a programmer full
+functionality of a list, which is too powerful, we give them the more
+restricted operations that a stack provides. So, since all that is needed for
+the lists implemented in this simulation are the operations that stacks
+provide, I decided to use a stack for this simulation. (And also because it's
+required for this assignment, but that's besides the point).
+
+
+The member functions associated with a stack include:
+- isEmpty: Returns true if the stack has no elements
+- push: Adds an element to the end of the stack
+- pop: Removes the element on the top of the stack
+- size: Returns the number of elements in the stack
+- print: Prints out the information of the top element of the stack
+- clear: Removes all elements in the stack
+- top: Returns the information of the top element of the stack
+
+Other situations where I could utilize a stack include:
+- Keeping track of a stack of books
+     - Since you put books down onto the stack and pick them up from the stack
+       on the same side of the stack, this represents a LIFO system. Thus, I
+       can use push() to push a new book onto the top of the stack and pop()
+       to remove that book from the top of the stack.
+- Keeping track of interrupted actions
+     - This means that, when you get interrupted when doing something, you
+       you do the activity you got interrupted by, and then you go back to the
+       activity you were previously doing. Thus, this is also a LIFO system,
+       meaning I can use push() to push a new activity onto me (interrupting
+       me from doing a task), and I can use pop() to complete the interruption
+       and go back to what I was doing beforehand.
+
+An interesting algorithm with stacks is the clear() function. This function
+removes all the elements of a stack in a pretty smooth and clever manner.
+First, the function checks if the stack is empty. If it is, it simply returns.
+Though, if it has elements in it, it starts a for loop where, for every element
+in the stack, it simply runs the pop() function. This is quite an interesting
+algorithm since, because pop() always removes the element on the top of the
+stack, you can simply keep running this function until there are no elements
+left.
+
+The push() and top() functions are also quite interesting. For the push()
+function, it takes an element as an argument and simply adds it to the top
+of the stack. For the top() function, if the stack isn't empty, it returns the
+information of the element at the top of the stack. I believe it's interesting 
+how you can add an element to a stack using push() and immediately use top() 
+to see its information. Overall these two functions display the LIFO system 
+that stacks employ very clearly.
+
+
+Testing:
+---------------
+
+For some parts of the RPNCalc class and the entirity of the DatumStack class,
+I used uni tests to ensure that all member functions worked as intended. For
+the RPNCalc class, I found that it was easier for these functions to simply
+use the compiler to check for any errors in the code, and I then used cylc
+files and diff to find any errors in outut or in any variables stored in the
+class. I also used Valgrind to find any memory errors in the program, though
+luckily I never ran into any memory issues.
+
+One note I'd like to add is that, for some unit tests on my RPNCalc functions,
+I made some private members of the class (the underlying DatumStack and the
+query_loop function) public in order to perform unit tests on them, and I
+immediately made them private again once these tests were completed.
+
+One error I encountered when coding was when the output of parseRString had
+way too many spaces within it. I eventually found that I used chars to take
+in information from the input stream rather than strings, resulting in the
+output having way more spaces than necessary. Changing the instances of "char"
+in the function to "string" solved the issue.
+
+Another (funnier) error I encountered was when my swap function wasn't
+producing the expected output. When investigating the function, I found that I
+had accidentally made it so the Datums that were popped from the stack were
+inserted back into the stack in their original positions. Thus, the swap
+function was basically a function that did absolutely nothing. I remedied this
+by altering the order in which these Datums were inserted back into the stack,
+making it so the swap function actually swapped the elements.
+
+During testing, I tried to cover everything possible about what functions
+could be activated and what elements could be in the stack when these functions
+are called (even no elements). I did massive amounts of diff testing with my
+command files to ensure that I covered every edge case I could think of.

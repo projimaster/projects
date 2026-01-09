@@ -1,0 +1,77 @@
+%%%
+%%% Errors
+%%%
+%%% Performs basically all functions to ensure each produces the correct
+%%% error message
+%%%
+%%% Author:  Justin Projansky (jproja01)
+%%%
+
+
+% Empty stack errors
+exec
+file
+if
+not
+print
+drop
+dup
+swap
++
+-
+*
+/
+mod
+<
+>
+<=
+>=
+==
+
+% Incorrect value errors
+2
+exec
+#t
+exec
+2
+file
+#t
+file
+2
+if
+2
+2
+if
+2
+2
+2
+if
+2
+2
+{ #t }
+if
+2
+{ #f }
+{ #t }
+if
+2
+not
+2
+swap
+clear
+#t
+<
+#t
+>
+#t
+<=
+#t
+>=
+
+% Other errors
+{ hi }
+exec
+hi
+{ hi }
+file
+

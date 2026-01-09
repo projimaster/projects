@@ -1,0 +1,32 @@
+%%%
+%%% Numbers
+%%%
+%%% Pushes multiple pairs of integers to the stack and adds, subtracts,
+%%% multiplies, and divides them
+%%%
+%%% Author:  Justin Projansky (jproja01)
+%%%
+
+9                  % pushes 9 onto the stack
+2                  % pushes 2 onto the stack
++
+print              % should print 11
+9                  % push 9 onto the stack
+-
+print              % should print 2
+3                  % push 3 onto the stack
+*
+print              % should print 6
+2                  % push 2 onto the stack
+/
+print              % should print 3
+2                  % push 2 onto the stack
+mod
+print              % should print 1
+1                  % push 1 onto the stack
++
+print              % should print 2
+2                  % push 2 onto the stack
+mod
+print              % should print 0
+

@@ -1,0 +1,17 @@
+Passenger 1 left train at station Riverway
+Passenger 2 left train at station Mission Park
+Passenger 7 left train at station Lechmere
+Passenger 4 left train at station Union Square
+Passenger 5 left train at station Union Square
+Passenger 6 left train at station Union Square
+Passenger 3 left train at station Back of the Hill
+Passenger 8 left train at station Back of the Hill
+Passenger 10 left train at station Back of the Hill
+Passenger 9 left train at station Riverway
+Passenger 11 left train at station Riverway
+Passenger 12 left train at station Riverway
+Passenger 13 left train at station Riverway
+Passenger 14 left train at station Back of the Hill
+Passenger 15 left train at station Back of the Hill
+Passenger 16 left train at station Back of the Hill
+Passenger 17 left train at station Back of the Hill
