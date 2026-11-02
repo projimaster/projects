@@ -1,0 +1,37 @@
+body,html {padding:0; margin:0; background-color:#d1f0ff}
+
+/* For header */
+div#header {height: 81px; background-image: url("beach.jpg"); background-position: center;
+    text-align:center; padding-top: 0px; color: #000; font-size: 16px; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000}
+ul#nav {background-color:#6b81e1; height: 45px;
+    list-style-type: none; text-align:center; padding-top: 10px; box-sizing:border-box; margin-top: 0; position: fixed; top: 81px; left: 0; width: 100%; z-index: 999}
+ul#nav li {display:inline-block; max-width: 150px; width: 10%; margin-right: 40px}
+ul#nav li:hover {background-color: #000}
+ul#nav li a {color: #fff; text-decoration:none;
+    font-size: 20px}
+ul#nav li a:hover {color: #e361b8}
+
+a:hover {color: #e361b8}
+
+/* For footer */
+div#footer {position: fixed; bottom: 0; left: 0; width: 100%; background-color: #99bcda; text-align: center; font-family: Arial, sans-serif;}
+
+/* For locations */
+ul#locations {list-style-type: none; padding: 0; font-size: 22px; font-family: Georgia, sans-serif;}
+ul#locations li {border: 1px solid #000; padding: 15px; margin: 0 auto; max-width: 650px; width: 80%; background-color: #e4e4e4}
+
+/* For reviews */
+ul#reviews {list-style-type: none; padding: 0; font-size: 20px; font-family: Georgia, sans-serif;}
+ul#reviews li {border: 1px solid #000; padding: 15px; margin: 0 auto; max-width: 750px; width: 80%; background-color: #e2b6fab9}
+
+/* For menu1 */
+ul#menu1 {list-style-type: none; margin-left: 20px; margin-right: 20px; padding: 0; font-size: 18px; font-family: Georgia, sans-serif;}
+ul#menu1 li {border: 1px solid #000; padding: 10px; margin: 8px 0px; background-color: #dab8aa}
+
+/* For menu2 */
+ul#menu2 {list-style-type: none; margin-left: 20px; margin-right: 20px; padding: 0; font-size: 18px; font-family: Georgia, sans-serif;}
+ul#menu2 li {border: 1px solid #000; padding: 10px; margin: 8px 0px; background-color: #d7d9bf}
+
+/* For menu3 */
+ul#menu3 {list-style-type: none; margin-left: 20px; margin-right: 20px; padding: 0; font-size: 18px; font-family: Georgia, sans-serif;}
+ul#menu3 li {border: 1px solid #000; padding: 10px; margin: 8px 0px; background-color: #addbe7}
